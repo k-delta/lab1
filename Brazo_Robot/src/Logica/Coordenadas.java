@@ -22,7 +22,7 @@ private int norma=9;//del vector
                  anguloA=Math.PI*anguloA/180;
                  vectorA[0] =(int)(Math.round(norma*Math.cos(anguloA)*Math.cos(rotar)));
                  vectorA[1]=(int)(Math.round(norma*Math.cos(anguloA)*Math.sin(rotar)));
-                 vectorA[2]= (int)(Math.round(norma*Math.sin(anguloA)))+3;
+                 vectorA[2]= (int)(Math.round(norma*Math.sin(anguloA)));//+3 base
                 for(int i=0; i<3; i++){
                     coordenada[i]=vectorA[i];
                 }
