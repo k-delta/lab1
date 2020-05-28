@@ -403,7 +403,10 @@ public class Pide_Datos extends javax.swing.JFrame {
         Brazo.setJointC(JointC.getValue());
         Brazo.setJointD(JointD.getValue());
         Brazo.setRota(Rota.getValue());
-        System.out.println(Brazo.Calcular());
+        int[]posicion=Brazo.Calcular();
+        X1.setText(""+posicion[0]);
+        Y1.setText(""+posicion[1]);
+        Z1.setText(""+posicion[2]);
     }
     
     

@@ -32,9 +32,9 @@ private int longitud=144;//de cada brazo
             public void run() {
                 new Pide_Datos().setVisible(true);
             }
-        });
+        });   
     }
-    
+
     public int[] Calcular(){
         int vectorA[] = {(int)(longitud*Math.cos(anguloA)*Math.cos(rotar)), (int)(longitud*Math.cos(anguloA)*Math.sin(rotar)), (int)(longitud*Math.sin(anguloA))};
         int vectorB[] = {(int)(longitud*Math.cos(anguloB)*Math.cos(rotar)), (int)(longitud*Math.cos(anguloB)*Math.sin(rotar)), (int)(longitud*Math.sin(anguloB))};
