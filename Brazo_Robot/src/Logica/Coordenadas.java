@@ -2,39 +2,56 @@
 package Logica;
 
 public class Coordenadas {
-private int anguloA;
-private int anguloB;
-private int anguloC;
-private int anguloD;
-private int rotar;
-private int longitud=144;//de cada brazo
+private double anguloA=51;//respecto vector y plano xy
+private double anguloB;
+private double anguloC;
+private double anguloD;
+private double rotar;
+private int norma=9;//del vector
 
-    public int[] Calcular(char vector){//voy en sentido anti horario y midiendo respecto a x
-        int vectorA[] = {(int)(Math.round(longitud*Math.cos(anguloA)*Math.cos(rotar))), (int)(Math.round(longitud*Math.cos(anguloA)*Math.sin(rotar))), (int)(Math.round(longitud*Math.sin(anguloA)))+3};
-        int vectorB[] = {(int)(Math.round(longitud*Math.cos(anguloB)*Math.cos(rotar))), (int)(Math.round(longitud*Math.cos(anguloB)*Math.sin(rotar))), (int)(Math.round(longitud*Math.sin(anguloB)))};
-        int vectorC[] = {(int)(Math.round(longitud*Math.cos(anguloC)*Math.cos(rotar))), (int)(Math.round(longitud*Math.cos(anguloC)*Math.sin(rotar))), (int)(Math.round(longitud*Math.sin(anguloC)))};
-        int vectorD[] = {(int)(Math.round(longitud*Math.cos(anguloD)*Math.cos(rotar))), (int)(Math.round(longitud*Math.cos(anguloD)*Math.sin(rotar))), (int)(Math.round(longitud*Math.sin(anguloD)))};
-    int[] coordenada = {0,0,0}; 
+    public int[] Calcular(char vector){//voy en sentido anti horario y midiendo respecto a +x
+       int[] coordenada = {0,0,0}; 
+       int[] vectorA = {0,0,0};
+       int[] vectorB = {0,0,0};
+       int[] vectorC = {0,0,0};
+       int[] vectorD = {0,0,0};
         switch (vector) 
         {
             case 'A':
+                rotar=Math.PI*rotar/180;
+                 anguloA=Math.PI*anguloA/180;
+                 vectorA[0] =(int)(Math.round(norma*Math.cos(anguloA)*Math.cos(rotar)));
+                 vectorA[1]=(int)(Math.round(norma*Math.cos(anguloA)*Math.sin(rotar)));
+                 vectorA[2]= (int)(Math.round(norma*Math.sin(anguloA)))+3;
                 for(int i=0; i<3; i++){
                     coordenada[i]=vectorA[i];
                 }
-                     break;
+                break;
             case 'B': 
+                anguloB=Math.PI*anguloB/180;
+                vectorB[0] =(int)(Math.round(norma*Math.cos(anguloB)*Math.cos(rotar)));
+                vectorB[1]=(int)(Math.round(norma*Math.cos(anguloB)*Math.sin(rotar)));
+                vectorB[2]= (int)(Math.round(norma*Math.sin(anguloB)));
                 for(int i=0; i<3; i++){
-                    coordenada[i]=vectorA[i]+vectorB[i];
+                    coordenada[i]=vectorB[i];
                 }
                 break;
             case 'C':
+                anguloC=Math.PI*anguloC/180;
+                vectorC[0] =(int)(Math.round(norma*Math.cos(anguloC)*Math.cos(rotar)));
+                vectorC[1]=(int)(Math.round(norma*Math.cos(anguloC)*Math.sin(rotar)));
+                vectorC[2]= (int)(Math.round(norma*Math.sin(anguloC)));
                 for(int i=0; i<3; i++){
-                    coordenada[i]=vectorA[i]+vectorB[i]+vectorC[i];
+                    coordenada[i]=vectorC[i];
                 }
                 break;
             case 'D':
+                anguloD=Math.PI*anguloD/180;
+                vectorD[0] =(int)(Math.round(norma*Math.cos(anguloD)*Math.cos(rotar)));
+                vectorD[1]=(int)(Math.round(norma*Math.cos(anguloD)*Math.sin(rotar)));
+                vectorD[2]= (int)(Math.round(norma*Math.sin(anguloD)));
                 for(int i=0; i<3; i++){
-                    coordenada[i]=vectorA[i]+vectorB[i]+vectorD[i];
+                    coordenada[i]=vectorD[i];
                 }
                 break;
         }
