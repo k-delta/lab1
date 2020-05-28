@@ -1,6 +1,6 @@
 
 package Visual;
-
+import Logica.Coordenadas;
 public class Pide_Datos extends javax.swing.JFrame {
     public Pide_Datos() {
         initComponents();
@@ -372,8 +372,7 @@ public class Pide_Datos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
-    
-         private void Mov_HoStateChanged(javax.swing.event.ChangeEvent evt) {                                    
+    private void Mov_HoStateChanged(javax.swing.event.ChangeEvent evt) {                                    
       mostrar_mov.setText(""+Mov_Ho.getValue());
     }                                   
 
@@ -396,7 +395,19 @@ public class Pide_Datos extends javax.swing.JFrame {
     private void JointDStateChanged(javax.swing.event.ChangeEvent evt) {                                    
         mostrarD.setText(""+JointD.getValue());
     }
-     /*basura
+    
+    private void Boton_DatosActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        Coordenadas Brazo = new Coordenadas();
+        Brazo.setJointA(JointA.getValue());
+        Brazo.setJointB(JointB.getValue());
+        Brazo.setJointC(JointC.getValue());
+        Brazo.setJointD(JointD.getValue());
+        Brazo.setRota(Rota.getValue());
+        System.out.println(Brazo.Calcular());
+    }
+    
+    
+    /*basura
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

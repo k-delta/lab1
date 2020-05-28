@@ -56,7 +56,6 @@ public class NewPruf extends javax.swing.JFrame {
         Title_Mov_Ho.setText("Desplazamiento Horizontal");
 
         mostrar_mov.setMinimumSize(new java.awt.Dimension(15, 20));
-        mostrar_mov.setPreferredSize(new java.awt.Dimension(15, 20));
         mostrar_mov.setText("0");
 
         Mov_Ho.setMajorTickSpacing(20);
@@ -73,7 +72,6 @@ public class NewPruf extends javax.swing.JFrame {
 
         mostrar_rota.setMinimumSize(new java.awt.Dimension(15, 20));
         mostrar_rota.setName(""); // NOI18N
-        mostrar_rota.setPreferredSize(new java.awt.Dimension(15, 20));
         mostrar_rota.setText("0");
 
         Rota.setMajorTickSpacing(60);
@@ -195,6 +193,11 @@ public class NewPruf extends javax.swing.JFrame {
 
         Boton_Datos.setLabel("Aceptar");
         Boton_Datos.setName(""); // NOI18N
+        Boton_Datos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_DatosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -399,6 +402,10 @@ public class NewPruf extends javax.swing.JFrame {
     private void JointDStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JointDStateChanged
         mostrarD.setText(""+JointD.getValue());
     }//GEN-LAST:event_JointDStateChanged
+
+    private void Boton_DatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_DatosActionPerformed
+        
+    }//GEN-LAST:event_Boton_DatosActionPerformed
 
     //inicilaizar frame 
     public static void main(String args[]) {
