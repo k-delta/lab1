@@ -1,8 +1,6 @@
 
 package Logica;
 
-import Visual.Pide_Datos;
-
 public class Coordenadas {
 private int anguloA;
 private int anguloB;
@@ -11,37 +9,35 @@ private int anguloD;
 private int rotar;
 private int longitud=144;//de cada brazo
 
-    public static void main(String args[]) {
-        try {//llamar frame
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    public int[] Calcular(char vector){//voy en sentido anti horario y midiendo respecto a x
+        int vectorA[] = {(int)(Math.round(longitud*Math.cos(anguloA)*Math.cos(rotar))), (int)(Math.round(longitud*Math.cos(anguloA)*Math.sin(rotar))), (int)(Math.round(longitud*Math.sin(anguloA)))+3};
+        int vectorB[] = {(int)(Math.round(longitud*Math.cos(anguloB)*Math.cos(rotar))), (int)(Math.round(longitud*Math.cos(anguloB)*Math.sin(rotar))), (int)(Math.round(longitud*Math.sin(anguloB)))};
+        int vectorC[] = {(int)(Math.round(longitud*Math.cos(anguloC)*Math.cos(rotar))), (int)(Math.round(longitud*Math.cos(anguloC)*Math.sin(rotar))), (int)(Math.round(longitud*Math.sin(anguloC)))};
+        int vectorD[] = {(int)(Math.round(longitud*Math.cos(anguloD)*Math.cos(rotar))), (int)(Math.round(longitud*Math.cos(anguloD)*Math.sin(rotar))), (int)(Math.round(longitud*Math.sin(anguloD)))};
+    int[] coordenada = {0,0,0}; 
+        switch (vector) 
+        {
+            case 'A':
+                for(int i=0; i<3; i++){
+                    coordenada[i]=vectorA[i];
                 }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pide_Datos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-                java.util.logging.Logger.getLogger(Pide_Datos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pide_Datos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pide_Datos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                     break;
+            case 'B': 
+                for(int i=0; i<3; i++){
+                    coordenada[i]=vectorA[i]+vectorB[i];
+                }
+                break;
+            case 'C':
+                for(int i=0; i<3; i++){
+                    coordenada[i]=vectorA[i]+vectorB[i]+vectorC[i];
+                }
+                break;
+            case 'D':
+                for(int i=0; i<3; i++){
+                    coordenada[i]=vectorA[i]+vectorB[i]+vectorD[i];
+                }
+                break;
         }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Pide_Datos().setVisible(true);
-            }
-        });   
-    }
-
-    public int[] Calcular(){
-        int vectorA[] = {(int)(longitud*Math.cos(anguloA)*Math.cos(rotar)), (int)(longitud*Math.cos(anguloA)*Math.sin(rotar)), (int)(longitud*Math.sin(anguloA))};
-        int vectorB[] = {(int)(longitud*Math.cos(anguloB)*Math.cos(rotar)), (int)(longitud*Math.cos(anguloB)*Math.sin(rotar)), (int)(longitud*Math.sin(anguloB))};
-        int vectorC[] = {(int)(longitud*Math.cos(anguloC)*Math.cos(rotar)), (int)(longitud*Math.cos(anguloC)*Math.sin(rotar)), (int)(longitud*Math.sin(anguloC))};
-        int vectorD[] = {(int)(longitud*Math.cos(anguloD)*Math.cos(rotar)), (int)(longitud*Math.cos(anguloD)*Math.sin(rotar)), (int)(longitud*Math.sin(anguloD))};
-        
-        int coordenada[]={vectorA[0]+vectorB[0]+vectorC[0]+vectorD[0],vectorA[1]+vectorB[1]+vectorC[1]+vectorD[1],vectorA[2]+vectorB[2]+vectorC[2]+vectorD[2]+3};
         return coordenada;//posicion final
     }
 public void setJointA(int jointA){

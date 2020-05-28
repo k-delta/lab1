@@ -1,11 +1,17 @@
 
 package Visual;
+
 import Logica.Coordenadas;
+
 public class Pide_Datos extends javax.swing.JFrame {
+
     public Pide_Datos() {
         initComponents();
     }
-     private void initComponents() {
+
+  @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
         Title_Mov_Ho = new java.awt.Label();
         mostrar_mov = new java.awt.Label();
@@ -52,7 +58,6 @@ public class Pide_Datos extends javax.swing.JFrame {
         Title_Mov_Ho.setText("Desplazamiento Horizontal");
 
         mostrar_mov.setMinimumSize(new java.awt.Dimension(15, 20));
-        mostrar_mov.setPreferredSize(new java.awt.Dimension(15, 20));
         mostrar_mov.setText("0");
 
         Mov_Ho.setMajorTickSpacing(20);
@@ -69,7 +74,6 @@ public class Pide_Datos extends javax.swing.JFrame {
 
         mostrar_rota.setMinimumSize(new java.awt.Dimension(15, 20));
         mostrar_rota.setName(""); // NOI18N
-        mostrar_rota.setPreferredSize(new java.awt.Dimension(15, 20));
         mostrar_rota.setText("0");
 
         Rota.setMajorTickSpacing(60);
@@ -191,6 +195,11 @@ public class Pide_Datos extends javax.swing.JFrame {
 
         Boton_Datos.setLabel("Aceptar");
         Boton_Datos.setName(""); // NOI18N
+        Boton_Datos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_DatosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -370,93 +379,59 @@ public class Pide_Datos extends javax.swing.JFrame {
 
         setSize(new java.awt.Dimension(570, 565));
         setLocationRelativeTo(null);
-    }
-    
-    private void Mov_HoStateChanged(javax.swing.event.ChangeEvent evt) {                                    
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void Mov_HoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Mov_HoStateChanged
       mostrar_mov.setText(""+Mov_Ho.getValue());
-    }                                   
+    }//GEN-LAST:event_Mov_HoStateChanged
 
-    private void RotaStateChanged(javax.swing.event.ChangeEvent evt) {                                  
+    private void RotaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_RotaStateChanged
         mostrar_rota.setText(""+Rota.getValue());
-    }                                 
+    }//GEN-LAST:event_RotaStateChanged
 
-    private void JointAStateChanged(javax.swing.event.ChangeEvent evt) {                                    
+    private void JointAStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JointAStateChanged
         mostrarA.setText(""+JointA.getValue());
-    }                                   
+    }//GEN-LAST:event_JointAStateChanged
 
-    private void JointBStateChanged(javax.swing.event.ChangeEvent evt) {                                    
+    private void JointBStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JointBStateChanged
         mostrarB.setText(""+JointB.getValue());
-    }                                   
+    }//GEN-LAST:event_JointBStateChanged
 
-    private void JointCStateChanged(javax.swing.event.ChangeEvent evt) {                                    
+    private void JointCStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JointCStateChanged
         mostrarC.setText(""+JointC.getValue());
-    }                                   
+    }//GEN-LAST:event_JointCStateChanged
 
-    private void JointDStateChanged(javax.swing.event.ChangeEvent evt) {                                    
+    private void JointDStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JointDStateChanged
         mostrarD.setText(""+JointD.getValue());
-    }
-    
-    private void Boton_DatosActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    }//GEN-LAST:event_JointDStateChanged
+
+    private void Boton_DatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_DatosActionPerformed
         Coordenadas Brazo = new Coordenadas();
         Brazo.setJointA(JointA.getValue());
         Brazo.setJointB(JointB.getValue());
         Brazo.setJointC(JointC.getValue());
         Brazo.setJointD(JointD.getValue());
         Brazo.setRota(Rota.getValue());
-        int[]posicion=Brazo.Calcular();
+        int[]posicion=Brazo.Calcular('A');
         X1.setText(""+posicion[0]);
         Y1.setText(""+posicion[1]);
         Z1.setText(""+posicion[2]);
-    }
-    
-    
-    /*basura
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+        posicion=Brazo.Calcular('B');
+        X2.setText(""+posicion[0]);
+        Y2.setText(""+posicion[1]);
+        Z2.setText(""+posicion[2]);
+        posicion=Brazo.Calcular('C');
+        X3.setText(""+posicion[0]);
+        Y3.setText(""+posicion[1]);
+        Z3.setText(""+posicion[2]);
+        posicion=Brazo.Calcular('D');
+        X4.setText(""+posicion[0]);
+        Y4.setText(""+posicion[1]);
+        Z4.setText(""+posicion[2]);
+    }//GEN-LAST:event_Boton_DatosActionPerformed
 
 
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pide_Datos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pide_Datos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pide_Datos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pide_Datos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Pide_Datos().setVisible(true);
-            }
-        });
-    }
-*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
     private java.awt.Button Boton_Datos;
     private javax.swing.JSlider JointA;
     private javax.swing.JSlider JointB;
@@ -494,4 +469,5 @@ public class Pide_Datos extends javax.swing.JFrame {
     private java.awt.Label mostrarD;
     private java.awt.Label mostrar_mov;
     private java.awt.Label mostrar_rota;
+    // End of variables declaration//GEN-END:variables
 }
