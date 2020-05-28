@@ -407,24 +407,26 @@ public class Pide_Datos extends javax.swing.JFrame {
 
     private void Boton_DatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_DatosActionPerformed
         Coordenadas Brazo = new Coordenadas();
-        Brazo.setJointA(JointA.getValue());
-        Brazo.setJointB(JointB.getValue());
-        Brazo.setJointC(JointC.getValue());
-        Brazo.setJointD(JointD.getValue());
+        int[] joints={JointA.getValue(),JointB.getValue(),JointC.getValue(),JointD.getValue()};
+        Brazo.setJoints(joints);
         Brazo.setRota(Rota.getValue());
-        int[]posicion=Brazo.Calcular('A');
+        
+        int[]posicion=Brazo.Calcular(0);
         X1.setText(""+posicion[0]);
         Y1.setText(""+posicion[1]);
         Z1.setText(""+posicion[2]);
-        posicion=Brazo.Calcular('B');
+        posicion=Brazo.Calcular(1);
+        
         X2.setText(""+posicion[0]);
         Y2.setText(""+posicion[1]);
         Z2.setText(""+posicion[2]);
-        posicion=Brazo.Calcular('C');
+        posicion=Brazo.Calcular(2);
+        
         X3.setText(""+posicion[0]);
         Y3.setText(""+posicion[1]);
         Z3.setText(""+posicion[2]);
-        posicion=Brazo.Calcular('D');
+        posicion=Brazo.Calcular(3);
+        
         X4.setText(""+posicion[0]);
         Y4.setText(""+posicion[1]);
         Z4.setText(""+posicion[2]);

@@ -2,78 +2,58 @@
 package Logica;
 
 public class Coordenadas {
-private double anguloA=51;//respecto vector y plano xy
-private double anguloB;
-private double anguloC;
-private double anguloD;
+private int[] angulo_grad;//respecto vector y el plano xy
+private double[] angulo;
+private int Num_Angulos=4;
 private double rotar;
 private int norma=9;//del vector
 
-    public int[] Calcular(char vector){//voy en sentido anti horario y midiendo respecto a +x
-       int[] coordenada = {0,0,0}; 
-       int[] vectorA = {0,0,0};
-       int[] vectorB = {0,0,0};
-       int[] vectorC = {0,0,0};
-       int[] vectorD = {0,0,0};
-        switch (vector) 
-        {
-            case 'A':
-                rotar=Math.PI*rotar/180;
-                 anguloA=Math.PI*anguloA/180;
-                 vectorA[0] =(int)(Math.round(norma*Math.cos(anguloA)*Math.cos(rotar)));
-                 vectorA[1]=(int)(Math.round(norma*Math.cos(anguloA)*Math.sin(rotar)));
-                 vectorA[2]= (int)(Math.round(norma*Math.sin(anguloA)));//+3 base
-                for(int i=0; i<3; i++){
-                    coordenada[i]=vectorA[i];
-                }
-                break;
-            case 'B': 
-                anguloB=Math.PI*anguloB/180;
-                vectorB[0] =(int)(Math.round(norma*Math.cos(anguloB)*Math.cos(rotar)));
-                vectorB[1]=(int)(Math.round(norma*Math.cos(anguloB)*Math.sin(rotar)));
-                vectorB[2]= (int)(Math.round(norma*Math.sin(anguloB)));
-                for(int i=0; i<3; i++){
-                    coordenada[i]=vectorB[i];
-                }
-                break;
-            case 'C':
-                anguloC=Math.PI*anguloC/180;
-                vectorC[0] =(int)(Math.round(norma*Math.cos(anguloC)*Math.cos(rotar)));
-                vectorC[1]=(int)(Math.round(norma*Math.cos(anguloC)*Math.sin(rotar)));
-                vectorC[2]= (int)(Math.round(norma*Math.sin(anguloC)));
-                for(int i=0; i<3; i++){
-                    coordenada[i]=vectorC[i];
-                }
-                break;
-            case 'D':
-                anguloD=Math.PI*anguloD/180;
-                vectorD[0] =(int)(Math.round(norma*Math.cos(anguloD)*Math.cos(rotar)));
-                vectorD[1]=(int)(Math.round(norma*Math.cos(anguloD)*Math.sin(rotar)));
-                vectorD[2]= (int)(Math.round(norma*Math.sin(anguloD)));
-                for(int i=0; i<3; i++){
-                    coordenada[i]=vectorD[i];
-                }
-                break;
+    private void Grad_a_Rad(){
+      for(int i=0;i<Num_Angulos;i++){
+          angulo[i]=angulo_grad[i]*Math.PI/180;
+      } 
+      rotar=rotar*Math.PI/180;
+    }
+
+    public int[] Calcular(int vector){//voy en sentido anti horario y midiendo respecto a +x
+        Grad_a_Rad();
+        double[] operar = {norma*Math.cos(rotar),norma*Math.sin(rotar),norma}; //estos son constantes en la operacion
+
+        double[] suma_cos= new double[Num_Angulos];//vectorA,vectorB,...,vectorN
+        suma_cos[0]=Math.sin(angulo[0]);
+        for(int i=0; i<(Num_Angulos);i++){ //inicializar todo=0
+            suma_cos[i]=0;
         }
-        return coordenada;//posicion final
+        for(int i=1; i<(Num_Angulos);i++){
+            suma_cos[i]=Math.cos(angulo[i-1])+Math.cos(angulo[i]);     
+        }
+        
+        double[] suma_sen= new double[Num_Angulos];//vectorA,vectorB,vectorC,vectorD
+        suma_sen[0]=Math.sin(angulo[0]);
+        for(int i=0; i<(Num_Angulos);i++){
+            suma_sen[i]=0;
+        }
+        for(int i=1; i<(Num_Angulos);i++){
+            suma_cos[i]=Math.sin(angulo[i-1])+Math.sin(angulo[i]);     
+        } 
+        
+        int[] coordenadas={0,0,0};
+        for(int i=0; i<2;i++){
+            coordenadas[i]=(int)(Math.round(operar[i]*suma_cos[vector]));
+        }
+        coordenadas[2]=(int)(Math.round(operar[2]*suma_sen[vector]));
+        return coordenadas;//posicion final
     }
-public void setJointA(int jointA){
-        this.anguloA= jointA;
+    public void setJoints(int[] joints){
+        this.angulo_grad=joints;
     }
-
-    public void setJointB(int jointB) {
-        this.anguloB= jointB; 
+    public double[] getJoints(){//en Rad
+        return angulo;
     }
-
-    public void setJointC(int jointC) {
-        this.anguloC= jointC; 
-    }
-
-    public void setJointD(int jointD) {
-       this.anguloD= jointD; 
-    }
-
     public void setRota(int rota) {
         this.rotar= rota; 
+    }
+    public double getRota(){
+        return rotar;
     }
 }
