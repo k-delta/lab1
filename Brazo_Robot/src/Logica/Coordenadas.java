@@ -2,46 +2,48 @@
 package Logica;
 
 public class Coordenadas {
-private int[] angulo_grad;//respecto vector y el plano xy
-private double[] angulo;
-private int Num_Angulos=4;
+private static final int num_angulos=4;
+private static final int norma=144;//del vector
+private final double[] angulo=new double[num_angulos];
+private int[] angulo_grad=new int[num_angulos];//respecto vector y el plano xy
 private double rotar;
-private int norma=9;//del vector
+double[] suma_cos= new double[num_angulos];
+double[] suma_sen= new double[num_angulos];
 
-    private void Grad_a_Rad(){
-      for(int i=0;i<Num_Angulos;i++){
-          angulo[i]=angulo_grad[i]*Math.PI/180;
-      } 
-      rotar=rotar*Math.PI/180;
-    }
-
-    public int[] Calcular(int vector){//voy en sentido anti horario y midiendo respecto a +x
+    public void Precalcular(){
+        Ajustar_Angulos();
         Grad_a_Rad();
-        double[] operar = {norma*Math.cos(rotar),norma*Math.sin(rotar),norma}; //estos son constantes en la operacion
-
-        double[] suma_cos= new double[Num_Angulos];//vectorA,vectorB,...,vectorN
-        suma_cos[0]=Math.sin(angulo[0]);
-        for(int i=0; i<(Num_Angulos);i++){ //inicializar todo=0
-            suma_cos[i]=0;
+        Sumas();
+    }
+    private void Ajustar_Angulos(){
+        for(int i=1; i<num_angulos;i++){
+            angulo_grad[i]=angulo_grad[i]-90-(int)(Math.round(Math.toDegrees(Math.acos(Math.sin(Math.toRadians(angulo_grad[i-1]))))));
+            System.out.print(angulo_grad[i]+", ");
         }
-        for(int i=1; i<(Num_Angulos);i++){
-            suma_cos[i]=Math.cos(angulo[i-1])+Math.cos(angulo[i]);     
+    }
+    private void Grad_a_Rad(){
+      for(int i=0;i<num_angulos;i++){
+          angulo[i]=Math.toRadians(angulo_grad[i]);
+      } 
+      rotar=Math.toRadians(rotar);
+    }
+    private void Sumas(){ 
+        suma_cos[0]=Math.cos(angulo[0]);
+        for(int i=1; i<(num_angulos);i++){
+            suma_cos[i]=suma_cos[i-1]+Math.cos(angulo[i]);
         }
-        
-        double[] suma_sen= new double[Num_Angulos];//vectorA,vectorB,vectorC,vectorD
         suma_sen[0]=Math.sin(angulo[0]);
-        for(int i=0; i<(Num_Angulos);i++){
-            suma_sen[i]=0;
+        for(int i=1; i<(num_angulos);i++){
+            suma_sen[i]=suma_sen[i-1]+Math.sin(angulo[i]);     
         }
-        for(int i=1; i<(Num_Angulos);i++){
-            suma_cos[i]=Math.sin(angulo[i-1])+Math.sin(angulo[i]);     
-        } 
-        
-        int[] coordenadas={0,0,0};
+    }
+    public int[] Calcular(int vector){//voy en sentido anti horario y midiendo respecto a +x
+        double[] operar= {norma*Math.cos(rotar),norma*Math.sin(rotar),norma};
+        int[] coordenadas=new int[3];
         for(int i=0; i<2;i++){
             coordenadas[i]=(int)(Math.round(operar[i]*suma_cos[vector]));
         }
-        coordenadas[2]=(int)(Math.round(operar[2]*suma_sen[vector]));
+        coordenadas[2]=(int)(Math.round(operar[2]*suma_sen[vector]))+3;//de la base+3
         return coordenadas;//posicion final
     }
     public void setJoints(int[] joints){
