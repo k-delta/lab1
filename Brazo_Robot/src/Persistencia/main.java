@@ -1,6 +1,7 @@
 
 package Persistencia;
 
+import Visual.Graficar;
 import Visual.Pide_Datos;
 
 public class main {
@@ -21,9 +22,8 @@ public class main {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Pide_Datos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-       
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            public void run() { 
                 new Pide_Datos().setVisible(true);
             }
         });

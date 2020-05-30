@@ -1,8 +1,6 @@
 
 package Visual;
-
 import Logica.Coordenadas;
-
 public class Pide_Datos extends javax.swing.JFrame {
 
     public Pide_Datos() {
@@ -406,35 +404,46 @@ public class Pide_Datos extends javax.swing.JFrame {
     }//GEN-LAST:event_JointDStateChanged
 
     private void Boton_DatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_DatosActionPerformed
+
         Coordenadas Brazo = new Coordenadas();
         int[] joints={JointA.getValue(),JointB.getValue(),JointC.getValue(),JointD.getValue()};
         Brazo.setJoints(joints);
         Brazo.setRota(Rota.getValue());
+        Brazo.setMov_Ho(Mov_Ho.getValue());
         Brazo.Precalcular();
         
-        int[]posicion=Brazo.Calcular(0);
-        X1.setText(""+posicion[0]);
-        Y1.setText(""+posicion[1]);
-        Z1.setText(""+posicion[2]);
+        posicionA=Brazo.Calcular(0);
+        X1.setText(""+posicionA[0]);
+        Y1.setText(""+posicionA[1]);
+        Z1.setText(""+posicionA[2]);
   
         
-        posicion=Brazo.Calcular(1);
-        X2.setText(""+posicion[0]);
-        Y2.setText(""+posicion[1]);
-        Z2.setText(""+posicion[2]);
+        posicionB=Brazo.Calcular(1);
+        X2.setText(""+posicionB[0]);
+        Y2.setText(""+posicionB[1]);
+        Z2.setText(""+posicionB[2]);
         
-        posicion=Brazo.Calcular(2);
-        X3.setText(""+posicion[0]);
-        Y3.setText(""+posicion[1]);
-        Z3.setText(""+posicion[2]);
+        posicionC=Brazo.Calcular(2);
+        X3.setText(""+posicionC[0]);
+        Y3.setText(""+posicionC[1]);
+        Z3.setText(""+posicionC[2]);
         
-        posicion=Brazo.Calcular(3);
-        X4.setText(""+posicion[0]);
-        Y4.setText(""+posicion[1]);
-        Z4.setText(""+posicion[2]);
+        posicionD=Brazo.Calcular(3);
+        X4.setText(""+posicionD[0]);
+        Y4.setText(""+posicionD[1]);
+        Z4.setText(""+posicionD[2]);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() { 
+                new Graficar(posicionA, posicionB, posicionC, posicionD).setVisible(true);
+            }
+        });
     }//GEN-LAST:event_Boton_DatosActionPerformed
-
-
+    public static int[] posicionA= new int[3];
+    public static int[] posicionB= new int[3];
+    public static int[] posicionC= new int[3];
+    public static int[] posicionD= new int[3];
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button Boton_Datos;
     private javax.swing.JSlider JointA;
@@ -474,4 +483,5 @@ public class Pide_Datos extends javax.swing.JFrame {
     private java.awt.Label mostrar_mov;
     private java.awt.Label mostrar_rota;
     // End of variables declaration//GEN-END:variables
+
 }
