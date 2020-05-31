@@ -1,7 +1,7 @@
 package Logica;
 
 public class Coordenadas {
-private static final int num_angulos=4;
+private static final int num_angulos=3;
 private static final int norma=144;//del vector
 private final double[] angulo=new double[num_angulos];
 private int[] angulo_grad=new int[num_angulos];//respecto vector y el plano xy
@@ -51,7 +51,6 @@ private final int base=3;//altura
         int[] posicion_2d={coordenada[0],coordenada[2]};
         return posicion_2d;
     }
-        
     public void setJoints(int[] joints){
         this.angulo_grad=joints;
     }
