@@ -467,10 +467,6 @@ public class ValoresCoordenadas extends javax.swing.JFrame {
         y3.setText(""+posicion[1]);
         z3.setText(""+posicion[2]);
         
-        posicion=Brazo.Calcular(3);
-        x4.setText(""+posicion[0]);
-        y4.setText(""+posicion[1]);
-        z4.setText(""+posicion[2]);
         Ventana brazoRobotico= new Ventana(plataforma,  s1,  s2,  s3,  sGD1,  sGI1,  sGD2,  sGI2);
         brazoRobotico.setVisible(true);
         brazoRobotico.setSize(800, 800);
