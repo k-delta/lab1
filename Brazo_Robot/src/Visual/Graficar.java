@@ -4,20 +4,11 @@ import Visual.Pide_Datos;
 import Logica.Coordenadas;
 public class Graficar extends javax.swing.JFrame {
 
-    private int[] lineaA=new int[2];
-    private int[] lineaB=new int[2];
-    private int[] lineaC=new int[2];
-    private int[] lineaD=new int[2];
     
-    public Graficar(int[] posicionA,int[] posicionB,int[] posicionC,int[] posicionD) {
-        Coordenadas Vector=new Coordenadas();
-        lineaA=Vector.Pasar_a_2d(posicionA);
-        lineaB=Vector.Pasar_a_2d(posicionB);
-        lineaC=Vector.Pasar_a_2d(posicionC);
-        lineaD=Vector.Pasar_a_2d(posicionD);
-        initComponents();
+    public Graficar() {
+        
     }
-
+/*
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -46,7 +37,7 @@ public class Graficar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables

@@ -1,7 +1,6 @@
 
 package Persistencia;
 
-import Visual.Graficar;
 import Visual.Pide_Datos;
 
 public class main {

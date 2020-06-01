@@ -432,11 +432,6 @@ public class Pide_Datos extends javax.swing.JFrame {
         X4.setText(""+posicionD[0]);
         Y4.setText(""+posicionD[1]);
         Z4.setText(""+posicionD[2]);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() { 
-                new Graficar(posicionA, posicionB, posicionC, posicionD).setVisible(true);
-            }
-        });
     }//GEN-LAST:event_Boton_DatosActionPerformed
     public static int[] posicionA= new int[3];
     public static int[] posicionB= new int[3];

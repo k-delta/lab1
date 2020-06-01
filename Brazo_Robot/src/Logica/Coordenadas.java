@@ -1,4 +1,3 @@
-
 package Logica;
 
 public class Coordenadas {
@@ -10,7 +9,6 @@ private double rotar;
 double[] suma_cos= new double[num_angulos];
 double[] suma_sen= new double[num_angulos];
 private int mov_x;
-private final int base=3;//altura
 
     public void Precalcular(){
         Ajustar_Angulos();
@@ -46,14 +44,9 @@ private final int base=3;//altura
             coordenadas[i]=(int)(Math.round(operar[i]*suma_cos[vector]));
         }
         coordenadas[0]=coordenadas[0]+mov_x;
-        coordenadas[2]=(int)(Math.round(operar[2]*suma_sen[vector]))+base;
+        coordenadas[2]=(int)(Math.round(operar[2]*suma_sen[vector]))+3;//de la base+3
         return coordenadas;//posicion final
     }
-        public int[] Pasar_a_2d(int[] coordenada){
-        int[] posicion_2d={coordenada[0],coordenada[2]};
-        return posicion_2d;
-    }
-        
     public void setJoints(int[] joints){
         this.angulo_grad=joints;
     }
@@ -66,7 +59,8 @@ private final int base=3;//altura
     public double getRota(){
         return rotar;
     }
-    public void setMov_Ho(int Mov_Ho) {
-        this.mov_x= Mov_Ho; 
+
+    public void setMov_Ho(int mov_Ho) {
+        this.mov_x=mov_Ho;
     }
 }
