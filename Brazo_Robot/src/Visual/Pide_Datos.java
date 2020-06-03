@@ -406,32 +406,36 @@ public class Pide_Datos extends javax.swing.JFrame {
     private void Boton_DatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_DatosActionPerformed
 
         Coordenadas Brazo = new Coordenadas();
-        int[] joints={JointA.getValue(),JointB.getValue(),JointC.getValue(),JointD.getValue()};
+        int[] joints={90,90,90,90};//JointA.getValue(),JointB.getValue(),JointC.getValue(),JointD.getValue()};
         Brazo.setJoints(joints);
         Brazo.setRota(Rota.getValue());
         Brazo.setMov_Ho(Mov_Ho.getValue());
         Brazo.Precalcular();
+        Brazo.setOpen(Pinza.isSelected());//true si open
         
-        posicionA=Brazo.Calcular(0);
+        posicionA=Brazo.Calcular(0,false);
         X1.setText(""+posicionA[0]);
         Y1.setText(""+posicionA[1]);
         Z1.setText(""+posicionA[2]);
   
         
-        posicionB=Brazo.Calcular(1);
+        posicionB=Brazo.Calcular(1,false);
         X2.setText(""+posicionB[0]);
         Y2.setText(""+posicionB[1]);
         Z2.setText(""+posicionB[2]);
         
-        posicionC=Brazo.Calcular(2);
+        posicionC=Brazo.Calcular(2,false);
         X3.setText(""+posicionC[0]);
         Y3.setText(""+posicionC[1]);
         Z3.setText(""+posicionC[2]);
         
-        posicionD=Brazo.Calcular(3);
+        posicionD=Brazo.Calcular(3,true);
         X4.setText(""+posicionD[0]);
         Y4.setText(""+posicionD[1]);
         Z4.setText(""+posicionD[2]);
+        //tanto si esta abierta como cerrada no debe salirse del plano
+        Brazo.getGarraInf();//coordenadas
+        Brazo.getGarraSup();
     }//GEN-LAST:event_Boton_DatosActionPerformed
     public static int[] posicionA= new int[3];
     public static int[] posicionB= new int[3];
