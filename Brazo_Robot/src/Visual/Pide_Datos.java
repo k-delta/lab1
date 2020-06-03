@@ -434,8 +434,8 @@ public class Pide_Datos extends javax.swing.JFrame {
         Y4.setText(""+posicionD[1]);
         Z4.setText(""+posicionD[2]);
         //tanto si esta abierta como cerrada no debe salirse del plano
-        Brazo.getGarraInf();//coordenadas
-        Brazo.getGarraSup();
+        int[] garraI= Brazo.R3_a_R2(Brazo.getGarraInf());//coordenadas
+        int[] garraS= Brazo.R3_a_R2(Brazo.getGarraSup());
     }//GEN-LAST:event_Boton_DatosActionPerformed
     public static int[] posicionA= new int[3];
     public static int[] posicionB= new int[3];

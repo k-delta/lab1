@@ -89,7 +89,10 @@ int[] garraInf=new int[3];
             setGarraSup(C);
         }
     }
-    
+    public int[] R3_a_R2(int[] vector){
+        int[] punto={vector[0],vector[2]};
+        return punto;
+    }
     public void setJoints(int[] joints){
         this.angulo_grad=joints;
     }
