@@ -65,30 +65,33 @@ int[] garraInf=new int[3];
             for(int i=0;i<3;i++){//calcula norma*20 + vector anterior
                 coordenadas[i]=coordenadas[i]+punto_I[i];
             }
-            Condiciones(coordenadas, punto_I);//coordenadas ->punto_F de norma 20 
+            coordenadas=Pinza(coordenadas, punto_I);//coordenadas ->punto_F de norma 20 
         }
         return coordenadas;//posicion final
     }
     
-    private void Condiciones(int[] v_Director, int[] punto_I){// genera vectores imaginarios para evaluar las condiciones   
+    private int[] Pinza(int[] v_Director, int[] punto_I){// genera vectores imaginarios para evaluar las condiciones   
         if(open){//arista-> punto del cuadrado
-            int[] aristaD={punto_I[0]+norma_f+(int)(Math.round(10/Math.sin(Math.toRadians(45)))), punto_I[1]+(int)(Math.round(10/Math.sin(Math.toRadians(45)))),v_Director[2]};
-            //pinza superior
-            int[] aristaE={punto_I[0]+(int)(Math.round(10/Math.sin(Math.toRadians(45)))),punto_I[1]+norma_f+(int)(Math.round(10/Math.sin(Math.toRadians(45)))),v_Director[2]};
+            int[] aristaB={punto_I[0]+(int)(Math.round(norma_f/2)),punto_I[1],(int)(Math.round(v_Director[2]/2))};
+            int[] aristaC={punto_I[0],punto_I[1]+(int)(Math.round(norma_f/2)),(int)(Math.round(v_Director[2]/2))};
+            int[] aristaD={punto_I[0]+(int)(Math.round(norma_f/2))+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))), punto_I[1]+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))),v_Director[2]};
+            int[] aristaE={punto_I[0]+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))),punto_I[1]+(int)(Math.round(norma_f/2))+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))),v_Director[2]};
             setGarraInf(aristaD);
             setGarraSup(aristaE);
+            System.out.println("open: "+aristaB[0]+","+aristaB[1]+","+aristaB[2]);
+            System.out.println(aristaC[0]+","+aristaC[1]+","+aristaC[2]);
+            System.out.println(aristaD[0]+","+aristaD[1]+","+aristaD[2]);
+            System.out.println(aristaE[0]+","+aristaE[1]+","+aristaE[2]);
         }else{//pinza cerrada
-            //inf
-            int[] B={punto_I[0]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),punto_I[1],(int)(Math.round(v_Director[2]/2))};
-            //sup
-            int[] C={punto_I[0],punto_I[1]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),(int)(Math.round(v_Director[2]/2))};
-            /*centro de pinza, es el mismo coordenadas
-            int[] D={punto_I[0]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))), punto_I[1]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),v_Director[2]};
-            aristaD=D;
-            */
-            setGarraInf(B);
-            setGarraSup(C);
+            int[] aristaB={punto_I[0]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),punto_I[1],(int)(Math.round(v_Director[2]/2))};
+            int[] aristaC={punto_I[0],punto_I[1]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),(int)(Math.round(v_Director[2]/2))};
+            setGarraInf(aristaB);
+            setGarraSup(aristaC);
+            System.out.println("close: "+aristaB[0]+","+aristaB[1]+","+aristaB[2]);
+            System.out.println(aristaC[0]+","+aristaC[1]+","+aristaC[2]);
         }
+        int[] Centro={punto_I[0]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))), punto_I[1]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),v_Director[2]};
+        return Centro;
     }
     
     //Garra

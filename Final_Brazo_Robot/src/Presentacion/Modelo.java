@@ -53,7 +53,8 @@ public class Modelo {
         public static int[] posicionB= new int[3];
         public static int[] posicionC= new int[3];
         public static int[] posicionD= new int[3];
-        
+        public static int[] garraI= new int[3];
+        public static int[] garraS= new int[3];
     public void calcularCoordenadas(){
         
         //JointA Slider Seccion 1
@@ -90,28 +91,27 @@ public class Modelo {
         getVentana().getZ4().setText(""+posicionD[2]);
         
         //tanto si esta abierta como cerrada no debe salirse del plano
-        int[] garraI= Brazo.R3_a_R2(Brazo.getGarraInf());//coordenadas - Garra Inferior
-        int[] garraS= Brazo.R3_a_R2(Brazo.getGarraSup());//Garra Superior
-        
+        garraI= Brazo.getGarraInf();//coordenadas - Garra Inferior
+        garraS= Brazo.getGarraSup();//Garra Superior
         Restricciones();
         
     }
     
     public void Restricciones(){
-        int i;
-        int cont=0;
-        for(i=0;i<=2;i++){
-            if(posicionA[i] < 0  || posicionA[i] > 800 || posicionB[i] < 0  || posicionB[i] > 800 || posicionC[i] < 0  || posicionC[i] > 800 || posicionD[i] < 0  || posicionD[i] > 800){
-                cont++;
-                if(cont==1){
-                Icon m = new ImageIcon(getClass().getResource("/imagenes/imagenalerta.png"));
-                JOptionPane.showMessageDialog(null, "Configuración no permitida: Excede los limites", "¡ALERTA! RESTRICCION GENERADA", JOptionPane.INFORMATION_MESSAGE,m);
-                }
+        boolean cont=false;
+        for(int i=0;i<3;i++){
+            if(posicionA[i]<0 || posicionB[i]<0  || posicionC[i]<0 || garraI[i]<0  || garraS[i]<0){
+              cont=true;
             }
-            
-            
         }
-        
-        
+        for(int i=0;i<2;i++){
+            if(posicionA[i]>800 || posicionB[i]>800 || posicionC[i]>800 || garraI[i]>800 || garraS[i]>800){
+              cont=true;
+            }
+        }
+        if(cont){
+        Icon m = new ImageIcon(getClass().getResource("/imagenes/imagenalerta.png"));
+        JOptionPane.showMessageDialog(null, "Configuración no permitida: Excede los limites", "¡ALERTA! RESTRICCION GENERADA", JOptionPane.INFORMATION_MESSAGE,m);  
+        }
     }
 }
