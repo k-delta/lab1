@@ -8,7 +8,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
-public class Controlador implements ChangeListener, ActionListener{
+public class Controlador implements ChangeListener{
   private Vista ventana;
     private Modelo miApp;
     
@@ -20,13 +20,9 @@ public class Controlador implements ChangeListener, ActionListener{
     //Datos de los sliders
     @Override
     public void stateChanged(ChangeEvent ce) {
-        miApp.cambiarValSlider(this.ventana.getMov_Ho().getValue(), this.ventana.getRota().getValue(), this.ventana.getJointA().getValue(), this.ventana.getJointB().getValue(), this.ventana.getJointC().getValue(), this.ventana.getJointD().getValue());
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent ae) {
         miApp.calcularCoordenadas();
-    }
-
-   
+    
+        miApp.cambiarValSlider(this.ventana.getMov_Ho().getValue(), this.ventana.getRota().getValue(), this.ventana.getJointA().getValue(), this.ventana.getJointB().getValue(), this.ventana.getJointC().getValue(), this.ventana.getJointD().getValue());
+        miApp.dibujo();
+    } 
 }

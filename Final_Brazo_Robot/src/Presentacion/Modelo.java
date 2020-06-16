@@ -1,19 +1,28 @@
 package Presentacion;
 
 import Logica.Coordenadas;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Modelo {
+    public static int[] posicionA= new int[3];
+    public static int[] posicionB= new int[3];
+    public static int[] posicionC= new int[3];
+    public static int[] posicionD= new int[3];
+    public static int[] garraI= new int[3];
+    public static int[] garraS= new int[3];
         
-    private Coordenadas miSistema;
+    private Coordenadas miSistema= new Coordenadas();
     private Vista ventana;
      
     // Métododos generados para ocultación de información
     
     public Modelo(){
-        
+       
     }
     
     public Vista getVentana(){        
@@ -49,51 +58,51 @@ public class Modelo {
         getVentana().getMostrarD().setText(String.valueOf(jLD));
     }
     
-        public static int[] posicionA= new int[3];
-        public static int[] posicionB= new int[3];
-        public static int[] posicionC= new int[3];
-        public static int[] posicionD= new int[3];
-        public static int[] garraI= new int[3];
-        public static int[] garraS= new int[3];
-    public void calcularCoordenadas(){
+    
+        
+       public void cambiarval(){
+           
+       }
+        
+        
+        public void calcularCoordenadas(){
         
         //JointA Slider Seccion 1
         //JointB Slider Seccion 2
         //JointC Slider Seccion 3
         //JointD Slider Seccion 4
         
-        Coordenadas Brazo = new Coordenadas();
-        int[] joints={getVentana().getJointA().getValue(),getVentana().getJointB().getValue(),getVentana().getJointC().getValue(),getVentana().getJointD().getValue()};
-        Brazo.setJoints(joints);
-        Brazo.setRota(getVentana().getRota().getValue());
-        Brazo.setMov_Ho(getVentana().getMov_Ho().getValue());
-        Brazo.Precalcular();
-        Brazo.setOpen(getVentana().getPinza().isSelected());//true si open
+            int[] joints={getVentana().getJointA().getValue(),getVentana().getJointB().getValue(),getVentana().getJointC().getValue(),getVentana().getJointD().getValue()};
+            miSistema.setJoints(joints);
+            miSistema.setRota(getVentana().getRota().getValue());
+            miSistema.setMov_Ho(getVentana().getMov_Ho().getValue());
+            miSistema.Precalcular();
+            miSistema.setOpen(getVentana().getPinza().isSelected());//true si open
         
-        posicionA=Brazo.Calcular(0,false);//Seccion 1
+        posicionA=miSistema.Calcular(0,false);//Seccion 1
         getVentana().getX1().setText(""+posicionA[0]);
         getVentana().getY1().setText(""+posicionA[1]);
         getVentana().getZ1().setText(""+posicionA[2]);
   
-        posicionB=Brazo.Calcular(1,false);//Seccion 2
+        posicionB=miSistema.Calcular(1,false);//Seccion 2
         getVentana().getX2().setText(""+posicionB[0]);
         getVentana().getY2().setText(""+posicionB[1]);
         getVentana().getZ2().setText(""+posicionB[2]);
         
-        posicionC=Brazo.Calcular(2,false);//Seccion 3
+        posicionC=miSistema.Calcular(2,false);//Seccion 3
         getVentana().getX3().setText(""+posicionC[0]);
         getVentana().getY3().setText(""+posicionC[1]);
         getVentana().getZ3().setText(""+posicionC[2]);
         
-        posicionD=Brazo.Calcular(3,true);//Garra
+        posicionD=miSistema.Calcular(3,true);//Garra
         getVentana().getX4().setText(""+posicionD[0]);
         getVentana().getY4().setText(""+posicionD[1]);
         getVentana().getZ4().setText(""+posicionD[2]);
         
         //tanto si esta abierta como cerrada no debe salirse del plano
-        garraI= Brazo.getGarraInf();//coordenadas - Garra Inferior
-        garraS= Brazo.getGarraSup();//Garra Superior
-        Restricciones();
+        garraI= miSistema.getGarraInf();//coordenadas - Garra Inferior
+        garraS= miSistema.getGarraSup();//Garra Superior
+        //Restricciones();
         
     }
     
@@ -113,5 +122,30 @@ public class Modelo {
         Icon m = new ImageIcon(getClass().getResource("/imagenes/imagenalerta.png"));
         JOptionPane.showMessageDialog(null, "Configuración no permitida: Excede los limites", "¡ALERTA! RESTRICCION GENERADA", JOptionPane.INFORMATION_MESSAGE,m);  
         }
+    }
+    
+    protected void dibujar(Graphics lapiz){
+        
+        lapiz.setColor(Color.white);
+        lapiz.fillRect(0, 0, getVentana().getWidth(), getVentana().getHeight());   // Limpia la superficie de dibuja con el color de fondo en el área especificada
+        lapiz.setColor(new Color(0xff, 0x00, 0x00));
+        // puntos
+            lapiz.drawLine(getVentana().getMov_Ho().getValue(), 0, posicionA[0], posicionA[2]);
+            lapiz.drawLine(posicionA[0], posicionA[2], posicionB[0], posicionB[2]);
+            lapiz.drawLine(posicionB[0], posicionB[2], posicionC[0], posicionC[2]);
+            lapiz.drawLine(posicionC[0], posicionC[2], posicionD[0], posicionD[2]);
+        
+        //String strCoordenada = "("+getMiSistema().getTrianguloActual().getxA()+", 45)";
+        //lapiz.drawString(strCoordenada, getMiSistema().getTrianguloActual().getxA(), 45);
+        
+    }
+    
+    public void dibujo(){
+        Canvas lienzo = getVentana().getVistaFrontal();
+        boolean dibujando=true;
+        Graphics lapizLienzo = lienzo.getGraphics();
+        //while(dibujando){                         
+            dibujar(lapizLienzo);
+       // }
     }
 }
