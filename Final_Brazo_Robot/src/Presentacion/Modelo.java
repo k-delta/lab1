@@ -72,7 +72,7 @@ public class Modelo {
         //JointC Slider Seccion 3
         //JointD Slider Seccion 4
         
-            int[] joints={getVentana().getJointA().getValue(),getVentana().getJointB().getValue(),getVentana().getJointC().getValue(),getVentana().getJointD().getValue()};
+            int[] joints={getVentana().getJointA().getValue()+180,getVentana().getJointB().getValue()+180,getVentana().getJointC().getValue()+180,getVentana().getJointD().getValue()+180};
             miSistema.setJoints(joints);
             miSistema.setRota(getVentana().getRota().getValue());
             miSistema.setMov_Ho(getVentana().getMov_Ho().getValue());
