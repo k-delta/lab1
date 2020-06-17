@@ -12,8 +12,11 @@ double[] suma_cos= new double[num_angulos];
 double[] suma_sen= new double[num_angulos];
 private int mov_x;
 private boolean open;//garra
-int[] garraSup=new int[3];
-int[] garraInf=new int[3];
+int[] garraA=new int[3];
+int[] garraB=new int[3];
+int[] garraC=new int [3];
+int[] garraD=new int [3];
+int[] garraE=new int [3];
 
     public void Precalcular(){
         Ajustar_Angulos();
@@ -76,19 +79,16 @@ int[] garraInf=new int[3];
             int[] aristaC={punto_I[0],punto_I[1]+(int)(Math.round(norma_f/2)),(int)(Math.round(v_Director[2]/2))};
             int[] aristaD={punto_I[0]+(int)(Math.round(norma_f/2))+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))), punto_I[1]+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))),v_Director[2]};
             int[] aristaE={punto_I[0]+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))),punto_I[1]+(int)(Math.round(norma_f/2))+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))),v_Director[2]};
-            setGarraInf(aristaD);
-            setGarraSup(aristaE);
-            System.out.println("open: "+aristaB[0]+","+aristaB[1]+","+aristaB[2]);
-            System.out.println(aristaC[0]+","+aristaC[1]+","+aristaC[2]);
-            System.out.println(aristaD[0]+","+aristaD[1]+","+aristaD[2]);
-            System.out.println(aristaE[0]+","+aristaE[1]+","+aristaE[2]);
+            setGarraB(aristaB);
+            setGarraC(aristaC);
+            setGarraD(aristaD);
+            setGarraE(aristaE);
+
         }else{//pinza cerrada
             int[] aristaB={punto_I[0]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),punto_I[1],(int)(Math.round(v_Director[2]/2))};
             int[] aristaC={punto_I[0],punto_I[1]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),(int)(Math.round(v_Director[2]/2))};
-            setGarraInf(aristaB);
-            setGarraSup(aristaC);
-            System.out.println("close: "+aristaB[0]+","+aristaB[1]+","+aristaB[2]);
-            System.out.println(aristaC[0]+","+aristaC[1]+","+aristaC[2]);
+            setGarraB(aristaB);
+            setGarraC(aristaC);
         }
         int[] Centro={punto_I[0]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))), punto_I[1]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),v_Director[2]};
         return Centro;
@@ -128,19 +128,34 @@ int[] garraInf=new int[3];
         return open;
     }
      
-    public int[] getGarraSup(){
-        return garraSup;
+    public int[] getGarraB(){
+        return garraB;
     }
     
-    public void setGarraSup(int[] aristaE) {
-        this.garraSup=aristaE;
+    public void setGarraB(int[] aristaB) {
+        this.garraB=aristaB;
     }
     
-    public int[] getGarraInf(){
-        return garraInf;
+    public int[] getGarraC(){
+        return garraC;
     }
     
-    public void setGarraInf(int[] aristaD) {
-        this.garraInf=aristaD;
+    public void setGarraC(int[] aristaC) {
+        this.garraC=aristaC;
+    }
+        public int[] getGarraD(){
+        return garraD;
+    }
+    
+    public void setGarraD(int[] aristaD) {
+        this.garraD=aristaD;
+    }
+    
+    public int[] getGarraE(){
+        return garraE;
+    }
+    
+    public void setGarraE(int[] aristaE) {
+        this.garraC=aristaE;
     }
 }

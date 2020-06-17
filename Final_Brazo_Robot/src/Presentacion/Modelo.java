@@ -100,8 +100,8 @@ public class Modelo {
         getVentana().getZ4().setText(""+posicionD[2]);
         
         //tanto si esta abierta como cerrada no debe salirse del plano
-        garraI= miSistema.getGarraInf();//coordenadas - Garra Inferior
-        garraS= miSistema.getGarraSup();//Garra Superior
+        garraI= miSistema.getGarraB();//coordenadas - Garra Inferior
+        garraS= miSistema.getGarraC();//Garra Superior
         //Restricciones();
         
     }
