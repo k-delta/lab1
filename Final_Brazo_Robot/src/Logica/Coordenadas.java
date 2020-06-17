@@ -74,19 +74,19 @@ int[] garraE=new int [3];
     }
     
     private int[] Pinza(int[] v_Director, int[] punto_I){// genera vectores imaginarios para evaluar las condiciones   
-        if(open){//arista-> punto del cuadrado
+        if(!open){//arista-> punto del cuadrado
             int[] aristaB={punto_I[0]+(int)(Math.round(norma_f/2)),punto_I[1],(int)(Math.round(v_Director[2]/2))};
             int[] aristaC={punto_I[0],punto_I[1]+(int)(Math.round(norma_f/2)),(int)(Math.round(v_Director[2]/2))};
-            int[] aristaD={punto_I[0]+(int)(Math.round(norma_f/2))+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))), punto_I[1]+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))),v_Director[2]};
-            int[] aristaE={punto_I[0]+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))),punto_I[1]+(int)(Math.round(norma_f/2))+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(45)))),v_Director[2]};
+            int[] aristaD={punto_I[0]+(int)(Math.round(norma_f/2))+(int)(Math.round((norma_f/2)/Math.sin(Math.toRadians(45)))), punto_I[1]+(int)(Math.round((norma_f/2)/Math.sin(Math.toRadians(45)))),v_Director[2]};
+            int[] aristaE={punto_I[0]+(int)(Math.round((norma_f/2)/Math.sin(Math.toRadians(45)))),punto_I[1]+(int)(Math.round(norma_f/2))+(int)(Math.round((norma_f/2)/Math.sin(Math.toRadians(45)))),v_Director[2]};
             setGarraB(aristaB);
             setGarraC(aristaC);
             setGarraD(aristaD);
             setGarraE(aristaE);
 
-        }else{//pinza cerrada
+        }else{//pinza abierta
             int[] aristaB={punto_I[0]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),punto_I[1],(int)(Math.round(v_Director[2]/2))};
-            int[] aristaC={punto_I[0],punto_I[1]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45)))),(int)(Math.round(v_Director[2]/2))};
+            int[] aristaC={punto_I[0],punto_I[1]+(int)(Math.round(norma_f*Math.cos(Math.toRadians(45+180)))),(int)(Math.round(v_Director[2]/2))};
             setGarraB(aristaB);
             setGarraC(aristaC);
         }

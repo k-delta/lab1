@@ -1,25 +1,31 @@
 
 package Presentacion;
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Label;
 import javax.swing.JCheckBox;
 import javax.swing.JSlider;
+
 public class Vista extends javax.swing.JFrame {
 
     private Controlador control;
     private Modelo modelo;
+    //private boolean seleccion;
     
     public Vista(Modelo m) {
-        this.setSize(new Dimension(1000,1000));
+        this.setSize(new Dimension(1000, 1000));
         modelo = m;
         initComponents();
-        
         asignacionDeEvents();
     }
 
+    
+
+    
+    
     public Controlador getControl() {
-        if(control == null){
+        if (control == null) {
             control = new Controlador(this);
         }
         return control;
@@ -141,9 +147,15 @@ public class Vista extends javax.swing.JFrame {
         this.Z4 = Z4;
     }
 
-    
-    
-  @SuppressWarnings("unchecked")
+    public JCheckBox getjCBVistaSuperior() {
+        return jCBVistaSuperior;
+    }
+
+    public void setjCBVistaSuperior(JCheckBox jCBVistaSuperior) {
+        this.jCBVistaSuperior = jCBVistaSuperior;
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -152,7 +164,6 @@ public class Vista extends javax.swing.JFrame {
         Title_Joint = new java.awt.Label();
         TitleA = new java.awt.Label();
         JointD = new javax.swing.JSlider();
-        Title_Pinza = new java.awt.Label();
         Pinza = new javax.swing.JCheckBox();
         mostrarA = new java.awt.Label();
         JointA = new javax.swing.JSlider();
@@ -172,8 +183,6 @@ public class Vista extends javax.swing.JFrame {
         Rota = new javax.swing.JSlider();
         jSPVistaFrontal = new javax.swing.JScrollPane();
         vistaFrontal = new java.awt.Canvas();
-        jSPVistaSuperior = new javax.swing.JScrollPane();
-        vistaSuperior = new java.awt.Canvas();
         jPanel1 = new javax.swing.JPanel();
         Title_X = new java.awt.Label();
         X1 = new java.awt.Label();
@@ -190,6 +199,7 @@ public class Vista extends javax.swing.JFrame {
         Z2 = new java.awt.Label();
         Z3 = new java.awt.Label();
         Z4 = new java.awt.Label();
+        jCBVistaSuperior = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 800, 500));
@@ -218,18 +228,11 @@ public class Vista extends javax.swing.JFrame {
         JointD.setPaintTicks(true);
         JointD.setValue(90);
 
-        Title_Pinza.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Title_Pinza.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        Title_Pinza.setText("Pinza");
-
+        Pinza.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        Pinza.setText("Pinza");
         Pinza.setMaximumSize(new java.awt.Dimension(25, 25));
         Pinza.setMinimumSize(new java.awt.Dimension(25, 25));
         Pinza.setPreferredSize(new java.awt.Dimension(25, 25));
-        Pinza.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PinzaActionPerformed(evt);
-            }
-        });
 
         mostrarA.setPreferredSize(new java.awt.Dimension(15, 20));
         mostrarA.setText("5");
@@ -299,10 +302,9 @@ public class Vista extends javax.swing.JFrame {
         Rota.setPaintTicks(true);
         Rota.setValue(0);
 
+        vistaFrontal.setMinimumSize(new java.awt.Dimension(800, 800));
         jSPVistaFrontal.setViewportView(vistaFrontal);
         vistaFrontal.getAccessibleContext().setAccessibleName("");
-
-        jSPVistaSuperior.setViewportView(vistaSuperior);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -407,49 +409,54 @@ public class Vista extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jCBVistaSuperior.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jCBVistaSuperior.setText("Vista Superior");
+        jCBVistaSuperior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBVistaSuperiorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(Title_Joint, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(281, 281, 281))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSPVistaFrontal, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jSPVistaSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(TitleC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TitleB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TitleD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(TitleA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(JointD, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
-                                .addComponent(JointC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(JointB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(JointA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
+                        .addComponent(jSPVistaFrontal, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(TitleC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(TitleB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(TitleD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(TitleA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(JointD, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                                    .addComponent(JointC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(JointB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(JointA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(Title_Joint, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59)
+                                .addComponent(jCBVistaSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(mostrarA, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(mostrarB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(mostrarC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(mostrarD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(Title_Pinza, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(1, 1, 1)
-                                    .addComponent(Pinza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(mostrarA, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mostrarB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(mostrarC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mostrarD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Pinza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(0, 66, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -480,7 +487,9 @@ public class Vista extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addComponent(Title_Joint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Title_Joint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCBVistaSuperior))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -508,18 +517,12 @@ public class Vista extends javax.swing.JFrame {
                                 .addComponent(Pinza, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(mostrar_rota, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(Title_Pinza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(61, 61, 61)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jSPVistaFrontal, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSPVistaSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(621, 621, 621))
+                .addGap(1427, 1427, 1427))
         );
-
-        Title_Pinza.getAccessibleContext().setAccessibleName("");
 
         jScrollPane1.setViewportView(jPanel2);
 
@@ -528,23 +531,21 @@ public class Vista extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 19, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(851, 778));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PinzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PinzaActionPerformed
+    private void jCBVistaSuperiorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBVistaSuperiorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PinzaActionPerformed
+    }//GEN-LAST:event_jCBVistaSuperiorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSlider JointA;
@@ -560,7 +561,6 @@ public class Vista extends javax.swing.JFrame {
     private java.awt.Label TitleD;
     private java.awt.Label Title_Joint;
     private java.awt.Label Title_Mov_Ho;
-    private java.awt.Label Title_Pinza;
     private java.awt.Label Title_Rota;
     private java.awt.Label Title_X;
     private java.awt.Label Title_Y;
@@ -577,10 +577,10 @@ public class Vista extends javax.swing.JFrame {
     public java.awt.Label Z2;
     public java.awt.Label Z3;
     public java.awt.Label Z4;
+    private javax.swing.JCheckBox jCBVistaSuperior;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jSPVistaFrontal;
-    private javax.swing.JScrollPane jSPVistaSuperior;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label mostrarA;
     private java.awt.Label mostrarB;
@@ -589,7 +589,6 @@ public class Vista extends javax.swing.JFrame {
     private java.awt.Label mostrar_mov;
     private java.awt.Label mostrar_rota;
     private java.awt.Canvas vistaFrontal;
-    private java.awt.Canvas vistaSuperior;
     // End of variables declaration//GEN-END:variables
 
     public JSlider getJointA() {
@@ -696,24 +695,16 @@ public class Vista extends javax.swing.JFrame {
         this.vistaFrontal = vistaFrontal;
     }
 
-    public Canvas getVistaSuperior() {
-        return vistaSuperior;
-    }
-
-    public void setVistaSuperior(Canvas vistaSuperior) {
-        this.vistaSuperior = vistaSuperior;
-    }
-    
     
 
-    public void asignacionDeEvents(){
+    public void asignacionDeEvents() {
         this.Mov_Ho.addChangeListener(getControl());
         this.Rota.addChangeListener(getControl());
         this.JointA.addChangeListener(getControl());
         this.JointB.addChangeListener(getControl());
         this.JointC.addChangeListener(getControl());
         this.JointD.addChangeListener(getControl());
-        
+
     }
-    
+
 }
