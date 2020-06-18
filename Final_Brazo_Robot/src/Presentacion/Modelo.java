@@ -11,12 +11,12 @@ import javax.swing.JOptionPane;
 
 public class Modelo implements Runnable{
 
-    public static int[] posicionA = new int[3];
-    public static int[] posicionB = new int[3];
-    public static int[] posicionC = new int[3];
-    public static int[] posicionD = new int[3];
-    public static int[] garraI = new int[3];
-    public static int[] garraS = new int[3];
+public static int[] posicionA= new int[3];
+    public static int[] posicionB= new int[3];
+    public static int[] posicionC= new int[3];
+    public static int[] pinzaCentro= new int[3];
+    public static int[] garraI= new int[3];
+    public static int[] garraS= new int[3];
 
 
 
@@ -29,7 +29,6 @@ public class Modelo implements Runnable{
     // Métododos generados para ocultación de información
     public Modelo() {
         dibujando=false;
-
     }
 
     public Vista getVentana() {
@@ -65,16 +64,16 @@ public class Modelo implements Runnable{
 
     public void calcularCoordenadas() {
 
-        //JointA Slider Seccion 1
-        //JointB Slider Seccion 2
-        //JointC Slider Seccion 3
-        //JointD Slider Seccion 4
+        //JointA Slider articulacion 1
+        //JointB Slider articulacion 2
+        //JointC Slider articulacion 3
+        //JointD Slider articulacion 4
         int[] joints = {getVentana().getJointA().getValue()+180, getVentana().getJointB().getValue()+180, getVentana().getJointC().getValue()+180, getVentana().getJointD().getValue()+180};
         miSistema.setJoints(joints);
         miSistema.setRota(getVentana().getRota().getValue());
         miSistema.setMov_Ho(getVentana().getMov_Ho().getValue());
         miSistema.Precalcular();
-        miSistema.setOpen(getVentana().getPinza().isSelected());//true si open
+        miSistema.setOpen(getVentana().getPinza().isSelected());//true -> open
 
         posicionA = miSistema.Calcular(0, false);//Seccion 1
         getVentana().getX1().setText("" + posicionA[0]);
@@ -91,18 +90,13 @@ public class Modelo implements Runnable{
         getVentana().getY3().setText("" + posicionC[1]);
         getVentana().getZ3().setText("" + posicionC[2]);
 
-        posicionD = miSistema.Calcular(3, true);//Garra
-        getVentana().getX4().setText("" + posicionD[0]);
-        getVentana().getY4().setText("" + posicionD[1]);
-        getVentana().getZ4().setText("" + posicionD[2]);
-
-        //tanto si esta abierta como cerrada no debe salirse del plano
-        garraI = miSistema.getGarraB();//coordenadas - Garra Inferior
-        garraS = miSistema.getGarraC();//Garra Superior
-   
+        pinzaCentro = miSistema.Calcular(3, true);//Garra
+        getVentana().getX4().setText("" + pinzaCentro[0]);
+        getVentana().getY4().setText("" + pinzaCentro[1]);
+        getVentana().getZ4().setText("" + pinzaCentro[2]);
         
         //Restricciones();
-
+        
          if(hiloDibujo == null){
             hiloDibujo = new Thread(this);
             dibujando = true;
@@ -112,20 +106,25 @@ public class Modelo implements Runnable{
     }
 
     public void Restricciones() {
-        boolean cont = false;
-        for (int i = 0; i < 3; i++) {
-            if (posicionA[i] < 0 || posicionB[i] < 0 || posicionC[i] < 0 || garraI[i] < 0 || garraS[i] < 0) {
-                cont = true;
+       if(!getVentana().getPinza().isSelected()){//true- close
+            int[] relleno={1,1,1};
+            miSistema.setGarrainf2(relleno);
+            miSistema.setGarrasup2(relleno);
+        }
+        boolean cont=false;
+        for(int i=0;i<3;i++){
+            if(posicionA[i]<0 || posicionB[i]<0  || posicionC[i]<0 || garraI[i]<0  || garraS[i]<0 || miSistema.getGarrainf1()[i]<0 || miSistema.getGarrasup1()[i]<0 || miSistema.getGarrasup2()[i]<0 || miSistema.getGarrainf2()[i]<0){
+              cont=true;
             }
         }
-        for (int i = 0; i < 2; i++) {
-            if (posicionA[i] > 800 || posicionB[i] > 800 || posicionC[i] > 800 || garraI[i] > 800 || garraS[i] > 800) {
-                cont = true;
+        for(int i=0;i<2;i++){
+            if(posicionA[i]>800 || posicionB[i]>800 || posicionC[i]>800 || garraI[i]>800 || garraS[i]>800 || miSistema.getGarrainf1()[i]<0 || miSistema.getGarrasup1()[i]<0 || miSistema.getGarrasup2()[i]<0 || miSistema.getGarrainf2()[i]<0){
+              cont=true;
             }
         }
-        if (cont) {
-            Icon m = new ImageIcon(getClass().getResource("/imagenes/imagenalerta.png"));
-            JOptionPane.showMessageDialog(null, "Configuración no permitida: Excede los limites", "¡ALERTA! RESTRICCION GENERADA", JOptionPane.INFORMATION_MESSAGE, m);
+        if(cont){
+        Icon m = new ImageIcon(getClass().getResource("/imagenes/imagenalerta.png"));
+        JOptionPane.showMessageDialog(null, "Configuración no permitida: Excede los limites", "¡ALERTA! RESTRICCION GENERADA", JOptionPane.INFORMATION_MESSAGE,m);  
         }
     }
     
@@ -133,50 +132,49 @@ public class Modelo implements Runnable{
         lapiz.setColor(Color.white);
         lapiz.fillRect(0, 0, getVentana().getWidth(), getVentana().getHeight());   // Limpia la superficie de dibuja con el color de fondo en el área especificada
         lapiz.setColor(new Color(0xff, 0x00, 0x00));
-        // puntos
         
-        if(getVentana().getjCBVistaSuperior().isSelected()){
-            lapiz.drawLine(getVentana().getMov_Ho().getValue(), 400, posicionA[0], 400+posicionA[1]);
+        // esta dibujando en el mismo lienzo
+        if(getVentana().getjCBVistaSuperior().isSelected()){ //vista superior
+            /*lapiz.drawLine(getVentana().getMov_Ho().getValue(), 400, posicionA[0], 400+posicionA[1]);
             lapiz.drawLine(posicionA[0], 400+posicionA[1], posicionB[0], 400+posicionB[1]);
             lapiz.drawLine(posicionB[0], 400+posicionB[1], posicionC[0], 400+posicionC[1]);
         
-            if(this.ventana.getPinza().isSelected()){
-                lapiz.drawLine(miSistema.getGarraB()[0], 400+miSistema.getGarraB()[1], miSistema.getGarraD()[0], 400+miSistema.getGarraD()[1]);
-                System.out.println("Hola cerrado");
-                lapiz.drawLine(miSistema.getGarraC()[0], 400+miSistema.getGarraC()[1], miSistema.getGarraD()[0], 400+miSistema.getGarraD()[1]);
-                lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarraB()[0], 400+miSistema.getGarraB()[1]);
-                lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarraC()[0], 400+miSistema.getGarraC()[1]);
-            }else{
-                lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarraB()[0], 400+miSistema.getGarraB()[1]);
-                System.out.println("Hola abierto");
-                lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarraC()[0], 400+miSistema.getGarraC()[1]);
-            }
-        }else{
+            if(this.ventana.getPinza().isSelected()){//cerrado
+                lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[1]);
+                lapiz.drawLine(miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[1], pinzaCentro[0] , 400+pinzaCentro[1]);
+                lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[1]);
+                lapiz.drawLine(miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[1], pinzaCentro[0] , 400+pinzaCentro[1]);
+            }else{//abierto
+                lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarrainf1()[0],400+ miSistema.getGarrainf1()[1]);
+                lapiz.drawLine(miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[1], miSistema.getGarrainf2()[0], 400+miSistema.getGarrainf2()[1]);
+               System.out.println("inf: "+miSistema.getGarrainf2()[0]+", "+miSistema.getGarrainf2()[1]);//ciclo infinito
+               System.out.println("sup: "+miSistema.getGarrasup2()[0]+", "+miSistema.getGarrasup2()[1]);
+                lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[1]);
+                lapiz.drawLine(miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[1], miSistema.getGarrasup2()[0], 400+miSistema.getGarrasup2()[1]);
+            }  */ 
+        }else{//vista lateral
             lapiz.drawLine(getVentana().getMov_Ho().getValue(), 400, posicionA[0], 400+posicionA[2]);
             lapiz.drawLine(posicionA[0], 400+posicionA[2], posicionB[0], 400+posicionB[2]);
             lapiz.drawLine(posicionB[0], 400+posicionB[2], posicionC[0], 400+posicionC[2]);
         
-            if(this.ventana.getPinza().isSelected()){
-                lapiz.drawLine(miSistema.getGarraB()[0], 400+miSistema.getGarraB()[2], miSistema.getGarraD()[0], 400+miSistema.getGarraD()[2]);
-                System.out.println("Hola cerrado");
-                lapiz.drawLine(miSistema.getGarraC()[0], 400+miSistema.getGarraC()[2], miSistema.getGarraD()[0], 400+miSistema.getGarraD()[2]);
-                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarraB()[0], 400+miSistema.getGarraB()[2]);
-                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarraC()[0], 400+miSistema.getGarraC()[2]);
-            }else{
-                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarraB()[0], 400+miSistema.getGarraB()[2]);
-                System.out.println("Hola abierto");
-                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarraC()[0], 400+miSistema.getGarraC()[2]);
+            if(this.ventana.getPinza().isSelected()){//cerrado
+                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[2]);
+                lapiz.drawLine(miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[2], pinzaCentro[0] , 400+pinzaCentro[2]);
+                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[2]);
+                lapiz.drawLine(miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[2], pinzaCentro[0] , 400+pinzaCentro[2]);
+            
+            }else{//abierto
+                //siempre los 2 mismos valores
+                System.out.println("inf: "+miSistema.getGarrainf2()[0]+", "+miSistema.getGarrainf2()[2]);
+                System.out.println("sup: "+miSistema.getGarrasup2()[0]+", "+miSistema.getGarrasup2()[2]);
+                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarrainf1()[0],400+ miSistema.getGarrainf1()[2]);
+                lapiz.drawLine(miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[2], miSistema.getGarrainf2()[0], 400+miSistema.getGarrainf2()[2]);
+                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[2]);
+                lapiz.drawLine(miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[2], miSistema.getGarrasup2()[0], 400+miSistema.getGarrasup2()[2]);
             }
         }
         
     }
-
-    
-    
-   
-    
-    
-   
 
     @Override
     public void run() {
