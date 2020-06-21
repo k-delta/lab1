@@ -15,4 +15,8 @@ public class Launcher {
         miApp = new Modelo();
         miApp.iniciar();
     }
+
+    public void setVisible(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

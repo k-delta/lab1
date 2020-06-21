@@ -1,6 +1,7 @@
 package Presentacion;
 
 import Logica.Coordenadas;
+import ds.desktop.notify.DesktopNotify;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,7 +10,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import jdk.nashorn.internal.ir.BreakNode;
-
+import java.applet.AudioClip;
+        
 public class Modelo implements Runnable{
 
 public static int[] posicionA= new int[3];
@@ -96,7 +98,7 @@ public static int[] posicionA= new int[3];
         getVentana().getY4().setText("" + pinzaCentro[1]);
         getVentana().getZ4().setText("" + pinzaCentro[2]);
         
-        //Restricciones();
+        Restricciones();
         
             if(hiloDibujo == null){
              hiloDibujo = new Thread(this);
@@ -123,8 +125,12 @@ public static int[] posicionA= new int[3];
             }
         }
         if(cont){
-        Icon m = new ImageIcon(getClass().getResource("/imagenes/imagenalerta.png"));
-        JOptionPane.showMessageDialog(null, "Configuración no permitida: Excede los limites", "¡ALERTA! RESTRICCION GENERADA", JOptionPane.INFORMATION_MESSAGE,m);  
+        AudioClip sonido;
+        sonido = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/Error_Restricciones.wav"));
+        sonido.play();
+        DesktopNotify.showDesktopMessage("¡ALERTA! RESTRICCION GENERADA", "Configuración no permitida: Excede los limites", DesktopNotify.ERROR, 2000L);//1000 es 1 segundo
+        //Icon m = new ImageIcon(getClass().getResource("/imagenes/imagenalerta.png"));
+        //JOptionPane.showMessageDialog(null, "Configuración no permitida: Excede los limites", "¡ALERTA! RESTRICCION GENERADA", JOptionPane.INFORMATION_MESSAGE,m);  
         }
     }
     
