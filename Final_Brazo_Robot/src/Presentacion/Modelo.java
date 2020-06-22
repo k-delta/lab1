@@ -17,7 +17,7 @@ public class Modelo implements Runnable{
 public static int[] posicionA= new int[3];
     public static int[] posicionB= new int[3];
     public static int[] posicionC= new int[3];
-    public static int[] pinzaCentro= new int[3];
+    public static int[] posicionD= new int[3];
     public static int[] garraI= new int[3];
     public static int[] garraS= new int[3];
 
@@ -81,22 +81,23 @@ public static int[] posicionA= new int[3];
         posicionA = miSistema.Calcular(0, false);//Seccion 1
         getVentana().getX1().setText("" + posicionA[0]);
         getVentana().getY1().setText("" + posicionA[1]);
-        getVentana().getZ1().setText("" + posicionA[2]);
+        getVentana().getZ1().setText("" + -1*posicionA[2]);
 
         posicionB = miSistema.Calcular(1, false);//Seccion 2
         getVentana().getX2().setText("" + posicionB[0]);
         getVentana().getY2().setText("" + posicionB[1]);
-        getVentana().getZ2().setText("" + posicionB[2]);
+        getVentana().getZ2().setText("" + -1*posicionB[2]);
 
         posicionC = miSistema.Calcular(2, false);//Seccion 3
         getVentana().getX3().setText("" + posicionC[0]);
         getVentana().getY3().setText("" + posicionC[1]);
-        getVentana().getZ3().setText("" + posicionC[2]);
+        getVentana().getZ3().setText("" + -1*posicionC[2]);
 
-        pinzaCentro = miSistema.Calcular(3, true);//Garra
-        getVentana().getX4().setText("" + pinzaCentro[0]);
-        getVentana().getY4().setText("" + pinzaCentro[1]);
-        getVentana().getZ4().setText("" + pinzaCentro[2]);
+        posicionD=miSistema.Calcular(3,true);//Garra
+        getVentana().getX4().setText(""+posicionD[0]);
+        getVentana().getY4().setText(""+posicionD[1]);
+        getVentana().getZ4().setText(""+posicionD[2]);
+
         
         Restricciones();
         
@@ -107,33 +108,52 @@ public static int[] posicionA= new int[3];
             }
     }
 
-    public void Restricciones() {
-       if(!getVentana().getPinza().isSelected()){//true- close
-            int[] relleno={1,1,1};
-            miSistema.setGarrainf2(relleno);
-            miSistema.setGarrasup2(relleno);
-        }
-        boolean cont=false;
-        for(int i=0;i<3;i++){
-            if(posicionA[i]<0 || posicionB[i]<0  || posicionC[i]<0 || garraI[i]<0  || garraS[i]<0 || miSistema.getGarrainf1()[i]<0 || miSistema.getGarrasup1()[i]<0 || miSistema.getGarrasup2()[i]<0 || miSistema.getGarrainf2()[i]<0){
-              cont=true;
+    public void Restricciones(){
+        int cont=0;
+        
+
+        if(getVentana().getPinza().isSelected()){
+            if(miSistema.getGarrainf1()[0]>800 || miSistema.getGarrainf1()[0]<0 || miSistema.getGarrainf1()[1]>400 || miSistema.getGarrainf1()[1]<-400 || miSistema.getGarrainf1()[2]*-1>800 || miSistema.getGarrainf1()[2]*-1<0 || posicionA[0]>800 || posicionA[0]<0 || posicionA[1]>400 || posicionA[1]<-400 || posicionA[2]*-1>800 || posicionA[2]*-1<0 || posicionB[0]>800 || posicionB[0]<0 || posicionB[1]>400 || posicionB[1]<-400 || posicionB[2]*-1>800 || posicionB[2]*-1<0 || posicionC[0]>800 || posicionC[0]<0 || posicionC[1]>400 || posicionC[1]<-400 || posicionC[2]*-1>800 || posicionC[2]*-1<0 || posicionD[0]>800 || posicionD[0]<0 || posicionD[1]>400 || posicionD[1]<-400 || posicionD[2]*-1>800 || posicionD[2]*-1<0 || miSistema.getGarrasup1()[0]>800 || miSistema.getGarrasup1()[0]<0 || miSistema.getGarrasup1()[1]>400 || miSistema.getGarrasup1()[1]<-400 || miSistema.getGarrasup1()[2]*-1>800 || miSistema.getGarrasup1()[2]*-1<0){
+            cont++;
+            if(miSistema.getGarrainf1()[0]>800 || miSistema.getGarrasup1()[0]>800){
+                System.out.println("hola");
             }
-        }
-        for(int i=0;i<2;i++){
-            if(posicionA[i]>800 || posicionB[i]>800 || posicionC[i]>800 || garraI[i]>800 || garraS[i]>800 || miSistema.getGarrainf1()[i]<0 || miSistema.getGarrasup1()[i]<0 || miSistema.getGarrasup2()[i]<0 || miSistema.getGarrainf2()[i]<0){
-              cont=true;
+                if(cont==1){
+                    System.out.println("cont"+cont);
+                    AudioClip sonido;
+                    //sonido = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/Error_Restricciones.wav"));
+                    //sonido.play();
+                    DesktopNotify.showDesktopMessage("¡ALERTA! RESTRICCION GENERADA", "Configuración no permitida: Excede los limites", DesktopNotify.ERROR, 2000L);//1000 es 1 segundo
+                    //Icon m = new ImageIcon(getClass().getResource("/imagenes/imagenalerta.png"));
+                    //JOptionPane.showMessageDialog(null, "Configuración no permitida: Excede los limites", "¡ALERTA! RESTRICCION GENERADA", JOptionPane.INFORMATION_MESSAGE,m);  
+                }            
             }
+        }else{
+            if(miSistema.getGarrainf1()[0]>800 || miSistema.getGarrainf1()[0]<0 || miSistema.getGarrainf1()[1]>400 || miSistema.getGarrainf1()[1]<-400 || miSistema.getGarrainf1()[2]*-1>800 || miSistema.getGarrainf1()[2]*-1<0 || miSistema.getGarrainf2()[0]>800 || miSistema.getGarrainf2()[0]<0 || miSistema.getGarrainf2()[1]>400 || miSistema.getGarrainf2()[1]<-400 || miSistema.getGarrainf2()[2]*-1>800 || miSistema.getGarrainf2()[2]*-1<0 || miSistema.getGarrasup1()[0]>800 || miSistema.getGarrasup1()[0]<0 || miSistema.getGarrasup1()[1]>400 || miSistema.getGarrasup1()[1]<-400 || miSistema.getGarrasup1()[2]*-1>800 || miSistema.getGarrasup1()[2]*-1<0 || miSistema.getGarrasup2()[0]>800 || miSistema.getGarrasup2()[0]<0 || miSistema.getGarrasup2()[1]>400 || miSistema.getGarrasup2()[1]<-400 || miSistema.getGarrasup2()[2]*-1>800 || miSistema.getGarrasup2()[2]*-1<0){
+                cont++;
+                if(cont==1){
+                    System.out.println("cont"+cont);
+                    AudioClip sonido;
+                    //sonido = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/Error_Restricciones.wav"));
+                    //sonido.play();
+                    DesktopNotify.showDesktopMessage("¡ALERTA! RESTRICCION GENERADA", "Configuración no permitida: Excede los limites", DesktopNotify.ERROR, 2000L);//1000 es 1 segundo
+                    //Icon m = new ImageIcon(getClass().getResource("/imagenes/imagenalerta.png"));
+                    //JOptionPane.showMessageDialog(null, "Configuración no permitida: Excede los limites", "¡ALERTA! RESTRICCION GENERADA", JOptionPane.INFORMATION_MESSAGE,m);  
+                }
+            }
+            
         }
-        if(cont){
-        AudioClip sonido;
-        sonido = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/Error_Restricciones.wav"));
-        sonido.play();
-        DesktopNotify.showDesktopMessage("¡ALERTA! RESTRICCION GENERADA", "Configuración no permitida: Excede los limites", DesktopNotify.ERROR, 2000L);//1000 es 1 segundo
+        //if(cont==1){
+        //System.out.println("cont"+cont);
+        //AudioClip sonido;
+        //sonido = java.applet.Applet.newAudioClip(getClass().getResource("/sonidos/Error_Restricciones.wav"));
+        //sonido.play();
+        //DesktopNotify.showDesktopMessage("¡ALERTA! RESTRICCION GENERADA", "Configuración no permitida: Excede los limites", DesktopNotify.ERROR, 2000L);//1000 es 1 segundo
         //Icon m = new ImageIcon(getClass().getResource("/imagenes/imagenalerta.png"));
         //JOptionPane.showMessageDialog(null, "Configuración no permitida: Excede los limites", "¡ALERTA! RESTRICCION GENERADA", JOptionPane.INFORMATION_MESSAGE,m);  
-        }
+        //}
     }
-    
+
     protected void dibujarVistaFrontal(Graphics lapiz) {
         
         lapiz.setColor(Color.CYAN);
@@ -149,9 +169,9 @@ public static int[] posicionA= new int[3];
         
             if(this.ventana.getPinza().isSelected()){//cerrado
                 lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[1]);
-                lapiz.drawLine(miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[1], pinzaCentro[0] , 400+pinzaCentro[1]);
+                lapiz.drawLine(miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[1], posicionD[0] , 400+posicionD[1]);
                 lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[1]);
-                lapiz.drawLine(miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[1], pinzaCentro[0] , 400+pinzaCentro[1]);
+                lapiz.drawLine(miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[1], posicionD[0] , 400+posicionD[1]);
             }else{//abierto
                 lapiz.drawLine(posicionC[0], 400+posicionC[1], miSistema.getGarrainf1()[0],400+ miSistema.getGarrainf1()[1]);
                 lapiz.drawLine(miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[1], miSistema.getGarrainf2()[0], 400+miSistema.getGarrainf2()[1]);
@@ -161,27 +181,29 @@ public static int[] posicionA= new int[3];
                 lapiz.drawLine(miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[1], miSistema.getGarrasup2()[0], 400+miSistema.getGarrasup2()[1]);
             } 
         }else{
-            lapiz.drawLine(getVentana().getMov_Ho().getValue(), 400, posicionA[0], 400+posicionA[2]);
-            lapiz.drawLine(posicionA[0], 400+posicionA[2], posicionB[0], 400+posicionB[2]);
-            lapiz.drawLine(posicionB[0], 400+posicionB[2], posicionC[0], 400+posicionC[2]);
+            lapiz.drawLine(getVentana().getMov_Ho().getValue(), 800, posicionA[0], 800+posicionA[2]);
+            lapiz.drawLine(posicionA[0], 800+posicionA[2], posicionB[0], 800+posicionB[2]);
+            lapiz.drawLine(posicionB[0], 800+posicionB[2], posicionC[0], 800+posicionC[2]);
             if(this.ventana.getPinza().isSelected()){//cerrado
-                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[2]); 
-                lapiz.drawLine(miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[2], pinzaCentro[0] , 400+pinzaCentro[2]);
-                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[2]);
-                lapiz.drawLine(miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[2], pinzaCentro[0] , 400+pinzaCentro[2]);
+                lapiz.drawLine(posicionC[0], 800+posicionC[2], miSistema.getGarrainf1()[0], 800+miSistema.getGarrainf1()[2]); 
+                lapiz.drawLine(miSistema.getGarrainf1()[0], 800+miSistema.getGarrainf1()[2], posicionD[0] , 800+posicionD[2]);
+                lapiz.drawLine(posicionC[0], 800+posicionC[2], miSistema.getGarrasup1()[0], 800+miSistema.getGarrasup1()[2]);
+                lapiz.drawLine(miSistema.getGarrasup1()[0], 800+miSistema.getGarrasup1()[2], posicionD[0] , 800+posicionD[2]);
                 
             }else{//abierto
                 //siempre los 2 mismos valores
                 System.out.println("inf: "+miSistema.getGarrainf2()[0]+", "+miSistema.getGarrainf2()[2]);
                 System.out.println("sup: "+miSistema.getGarrasup2()[0]+", "+miSistema.getGarrasup2()[2]);
-                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarrainf1()[0],400+ miSistema.getGarrainf1()[2]);
-                lapiz.drawLine(miSistema.getGarrainf1()[0], 400+miSistema.getGarrainf1()[2], miSistema.getGarrainf2()[0], 400+miSistema.getGarrainf2()[2]);
-                lapiz.drawLine(posicionC[0], 400+posicionC[2], miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[2]);
-                lapiz.drawLine(miSistema.getGarrasup1()[0], 400+miSistema.getGarrasup1()[2], miSistema.getGarrasup2()[0], 400+miSistema.getGarrasup2()[2]);
+                lapiz.drawLine(posicionC[0], 800+posicionC[2], miSistema.getGarrainf1()[0],800+ miSistema.getGarrainf1()[2]);
+                lapiz.drawLine(miSistema.getGarrainf1()[0], 800+miSistema.getGarrainf1()[2], miSistema.getGarrainf2()[0], 800+miSistema.getGarrainf2()[2]);
+                lapiz.drawLine(posicionC[0], 800+posicionC[2], miSistema.getGarrasup1()[0], 800+miSistema.getGarrasup1()[2]);
+                lapiz.drawLine(miSistema.getGarrasup1()[0], 800+miSistema.getGarrasup1()[2], miSistema.getGarrasup2()[0], 800+miSistema.getGarrasup2()[2]);
                 
             }
         }
     }
+
+
 
     @Override
     public void run() {

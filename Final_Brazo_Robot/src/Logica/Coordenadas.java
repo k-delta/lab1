@@ -16,6 +16,8 @@ int[] garrainf1=new int[3];
 int[] garrainf2=new int[3];
 int[] garrasup1=new int [3];
 int[] garrasup2=new int [3];
+int[] posicionD=new int [3];
+
 
     public void Precalcular(){
         Ajustar_Angulos();
@@ -48,7 +50,7 @@ int[] garrasup2=new int [3];
     }
     
     public int[] Calcular(int vector,boolean v_final){//voy en sentido anti horario y midiendo respecto a +x
-        final double[] operar={norma*Math.cos(rotar),norma*Math.sin(rotar),norma};//se deduce de ecuaciones
+        double[] operar={norma*Math.cos(rotar),norma*Math.sin(rotar),norma};
         int[] coordenadas=new int[3];
         for(int i=0; i<2;i++){
             coordenadas[i]=(int)(Math.round(operar[i]*suma_cos[vector]));
@@ -64,13 +66,14 @@ int[] garrasup2=new int [3];
             for(int i=0; i<3; i++){//vector unitario*20
                 coordenadas[i]=norma_f*coordenadas[i]/norma;
             }
-            for(int i=0;i<3;i++){//calcula norma*20 + vector anterior
+            for(int i=0;i<3;i++){//el vector norma20 + vector anterior
                 coordenadas[i]=coordenadas[i]+punto_I[i];
             }
-            coordenadas=Pinza(coordenadas, punto_I);//coordenadas ->punto_F de norma 20 
+            Pinza(coordenadas, punto_I);
         }
         return coordenadas;//posicion final
     }
+
     
     private int[] Pinza(int[] v_Director, int[] punto_I){// genera vectores imaginarios para evaluar las condiciones   
         if(!open){//arista-> punto del cuadrado
@@ -78,8 +81,8 @@ int[] garrasup2=new int [3];
             int[] sup1={punto_I[0],punto_I[1]+(int)(Math.round(norma_f/2)),v_Director[2]+5};
             int[] inf2={punto_I[0]+(int)(Math.round(norma_f/2))+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(30)))), punto_I[1]+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(30)))),v_Director[2]};
             int[] sup2={punto_I[0]+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(30)))),punto_I[1]+(int)(Math.round(norma_f/2))+(int)(Math.round((norma_f/4)/Math.sin(Math.toRadians(30)))),v_Director[2]};
-            System.out.println("hola1"+inf2[0]+" , "+ inf2[1]+" , "+inf2[2]);
-            System.out.println("hola2"+sup2[0]+" , "+ sup2[1]+" , "+sup2[2]);
+            //System.out.println("hola1"+inf2[0]+" , "+ inf2[1]+" , "+inf2[2]);
+            //System.out.println("hola2"+sup2[0]+" , "+ sup2[1]+" , "+sup2[2]);
             setGarrainf1(inf1);
             setGarrasup1(sup1);
             setGarrainf2(inf2);
@@ -157,5 +160,13 @@ int[] garrasup2=new int [3];
     
     public void setGarrasup2(int[] garrasup2) {
         this.garrasup2=garrasup2;
+    }
+    
+    public int[] getPosicionD() {
+        return posicionD;
+    }
+
+    public void setPosicionD(int[] posicionD) {
+        this.posicionD = posicionD;
     }
 }

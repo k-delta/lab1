@@ -173,7 +173,6 @@ public class Vista extends javax.swing.JFrame {
         JointA = new javax.swing.JSlider();
         JointB = new javax.swing.JSlider();
         JointC = new javax.swing.JSlider();
-        Mov_Ho = new javax.swing.JSlider();
         Rota = new javax.swing.JSlider();
         jSPVistaFrontal = new javax.swing.JScrollPane();
         vistaFrontal = new java.awt.Canvas();
@@ -207,6 +206,7 @@ public class Vista extends javax.swing.JFrame {
         mostrarB = new javax.swing.JLabel();
         mostrarD = new javax.swing.JLabel();
         mostrarC = new javax.swing.JLabel();
+        Mov_Ho = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Brazo Robotico");
@@ -273,15 +273,6 @@ public class Vista extends javax.swing.JFrame {
         JointC.setPaintTicks(true);
         JointC.setValue(90);
         JointC.setOpaque(false);
-
-        Mov_Ho.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        Mov_Ho.setMajorTickSpacing(100);
-        Mov_Ho.setMaximum(800);
-        Mov_Ho.setPaintLabels(true);
-        Mov_Ho.setPaintTicks(true);
-        Mov_Ho.setSnapToTicks(true);
-        Mov_Ho.setValue(0);
-        Mov_Ho.setOpaque(false);
 
         Rota.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         Rota.setMajorTickSpacing(45);
@@ -489,6 +480,14 @@ public class Vista extends javax.swing.JFrame {
         mostrarC.setText("5");
         mostrarC.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        Mov_Ho.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Mov_Ho.setMajorTickSpacing(100);
+        Mov_Ho.setMaximum(800);
+        Mov_Ho.setPaintLabels(true);
+        Mov_Ho.setPaintTicks(true);
+        Mov_Ho.setValue(0);
+        Mov_Ho.setOpaque(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -535,10 +534,12 @@ public class Vista extends javax.swing.JFrame {
                         .addGap(0, 90, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Mov_Ho, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
-                            .addComponent(Rota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Rota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(Mov_Ho, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(mostrar_mov, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
@@ -747,9 +748,6 @@ public class Vista extends javax.swing.JFrame {
         this.mostrarD = mostrarD;
     }
 
-    
-
-    
 
     public JLabel getMostrar_mov() {
         return mostrar_mov;
